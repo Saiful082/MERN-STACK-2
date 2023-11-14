@@ -9,7 +9,7 @@ import {
 import { app } from '../firebase';
 
 import { useDispatch } from 'react-redux';
-
+import {Link} from 'react-router-dom';
 import { deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserStart, updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/user/userSlice';
 
 export default function Profile() {
@@ -178,6 +178,9 @@ export default function Profile() {
         >
           {loading ? 'Loading...' : 'Update'}
         </button>
+        <Link className="bg-blue-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95" to={'/create-listing'}>
+        Create Listing
+        </Link>
       </form>
       <div className='flex justify-between mt-5'>
         <span
