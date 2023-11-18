@@ -21,14 +21,24 @@ import {
 } from '../../redux/user/userSlice';
 
 export default function Profile() {
-  const fileRef = useRef(null);
+  // const fileRef = useRef(null);
+  // const { currentUser, loading, error } = useSelector((state) => state.user);
+  // const [file, setFile] = useState(undefined);
+  // const [filePerc, setFilePerc] = useState(0);
+  // const [fileUploadError, setFileUploadError] = useState(false);
+  // const [formData, setFormData] = useState({});
+  // const [updateSuccess, setUpdateSuccess] = useState(false);
+  // const [showListingsError, setShowListingsError] = useState(false);
+  // const [userListings, setUserListings] = useState([]);
+  // const dispatch = useDispatch();
+   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
-  const [showListingsError, setShowListingsError] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
   // firebase storage
@@ -130,7 +140,7 @@ export default function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`/api/user/listing/${currentUser._id}`);
       const data = await res.json();
       if (data.success === false) {
         setShowListingsError(true);
@@ -233,16 +243,24 @@ export default function Profile() {
         {showListingsError ? 'Error showing listings' : ''}
         </p>
       {
-        userListings && userListings.length > 0 && userListings.map((listing) => 
+        userListings && userListings.length > 0 &&
+         userListings.map((listing) => 
         <div key={listing._id}
-         className=''>
+         className='border rounded-lg p-3 gap-4 flex justify-between items-center'>
           <Link to={`/listings/${listing._id}`}> 
-          <img src={listing.imageUrls[0]} alt="listing cover" />
+          <img src={listing.imageUrls[0]} alt="listing cover" 
+          className='h-16 w-16 object-contain '/>
           </Link>
-          <Link to={`/listing/${listing._id}`}>
-            <p className='text-slate-700'>{listing.name}</p>
+          <Link className='text-slate-700 font-semibold 
+            flex-1 hover:underline truncate' to={`/listing/${listing._id}`}>
+            <p className=''>{listing.name}</p>
           </Link>
-           </div>)
+          <div className='flex flex-col items-center '>
+          <button className='text-green-800 uppercase'>Edit</button>
+          <button className='text-red-700 uppercase'>Delete</button>
+          </div>
+           </div>
+           )
       }
     </div>
   );
