@@ -1,5 +1,5 @@
 import { createListing } from "../controllers/listing.controller";
-import { verifyToken } from "../utils/verifyUser";
+import { verifyToken } from "../utils/verifyUser.js";
 
 
 

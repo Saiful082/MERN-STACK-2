@@ -29,7 +29,7 @@ export default function CreateListing() {
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false);
   console.log(formData);
 
@@ -94,10 +94,12 @@ export default function CreateListing() {
   };
 
   const handleChange = (e) => {
-    if (e.target.id === 'sale' || e.target.id === 'rent') {
+    if (
+    e.target.id === 'sale' || 
+    e.target.id === 'rent') {
       setFormData({
         ...formData,
-        type: e.target.id,
+        type: e.target.id
       });
     }
 
@@ -108,7 +110,7 @@ export default function CreateListing() {
     ) {
       setFormData({
         ...formData,
-        [e.target.id]: e.target.checked,
+        [e.target.id]: e.target.checked
       });
     }
 
@@ -125,12 +127,12 @@ export default function CreateListing() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      if (formData.imageUrls.length < 1)
-        return setError('You must upload at least one image');
-      if (+formData.regularPrice < +formData.discountPrice)
-        return setError('Discount price must be lower than regular price');
+     e.preventDefault();
+     try {
+      if(formData.imageUrls.length < 1 ) return 
+      setError('You must uplode at list on images ')
+      if(+formData.regularPrice < +formData.discountPrice) return 
+      setError('Discount price must be lower than regular price')
       setLoading(true);
       setError(false);
       const res = await fetch('/api/listing/create', {
@@ -144,16 +146,17 @@ export default function CreateListing() {
         }),
       });
       const data = await res.json();
-      setLoading(false);
-      if (data.success === false) {
+      if(data.success === false) {
         setError(data.message);
-      }
-      // navigate(`/listing/${data._id}`);
-    } catch (error) {
+      } 
+     navigate(`/listing/${data._id}`);
+     } catch (error) {
       setError(error.message);
       setLoading(false);
-    }
-  };
+      
+     }
+
+  }
   return (
     <main className='p-3 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
@@ -261,7 +264,7 @@ export default function CreateListing() {
                 type='number'
                 id='bathrooms'
                 min='1'
-                max='10'
+                max='20'
                 required
                 className='p-3 border border-gray-300 rounded-lg'
                 onChange={handleChange}
