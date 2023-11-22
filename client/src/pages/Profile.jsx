@@ -21,16 +21,7 @@ import {
 } from '../../redux/user/userSlice';
 
 export default function Profile() {
-  // const fileRef = useRef(null);
-  // const { currentUser, loading, error } = useSelector((state) => state.user);
-  // const [file, setFile] = useState(undefined);
-  // const [filePerc, setFilePerc] = useState(0);
-  // const [fileUploadError, setFileUploadError] = useState(false);
-  // const [formData, setFormData] = useState({});
-  // const [updateSuccess, setUpdateSuccess] = useState(false);
-  // const [showListingsError, setShowListingsError] = useState(false);
-  // const [userListings, setUserListings] = useState([]);
-  // const dispatch = useDispatch();
+ 
    const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
@@ -141,7 +132,7 @@ export default function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`/api/user/listing/${currentUser._id}`);
+      const res = await fetch(`/api/user/listings/${currentUser._id}`);
       const data = await res.json();
       if (data.success === false) {
         setShowListingsError(true);

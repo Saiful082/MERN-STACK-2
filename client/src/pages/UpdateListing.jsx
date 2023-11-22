@@ -17,7 +17,7 @@ export default function CreateListing() {
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     imageUrls: [],
-    name: 'name',
+    name: '',
     description: '',
     address: '',
     type: 'rent',
